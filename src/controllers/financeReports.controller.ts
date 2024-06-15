@@ -246,3 +246,43 @@ export const getWeekSales = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getMonthlySales = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const today = new Date();
+    const sixMonthsAgo = new Date(today);
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
+    const monthlySales = await FinanceReportModel.find({
+      createdBy: id,
+      date: {
+        $gte: sixMonthsAgo,
+      },
+      type: "Income",
+    });
+
+    const salesByMonth: number[] = Array(6).fill(0);
+
+    monthlySales.forEach((sale) => {
+      const saleMonth = sale.date.getMonth();
+      const currentMonth = new Date().getMonth();
+      const monthIndex =
+        saleMonth <= currentMonth
+          ? currentMonth - saleMonth
+          : 12 - saleMonth + currentMonth;
+      if (monthIndex < 6) {
+        salesByMonth[5 - monthIndex]++;
+      }
+    });
+    res.json({
+      ok: true,
+      salesByMonth,
+    });
+  } catch (error) {
+    res.status(400).json({
+      ok: false,
+      msg: "Not Found",
+    });
+  }
+};

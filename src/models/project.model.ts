@@ -19,7 +19,7 @@ const ProjectSchema = new Schema({
     type: String,
     required: true,
   },
-  createdBy: {
+  owner: {
     type: String,
     required: true,
   },

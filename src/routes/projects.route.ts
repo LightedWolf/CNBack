@@ -20,7 +20,7 @@ route.post(
     check("name", "Name is required").not().isEmpty(),
     check("costumer", "Costumer is required").not().isEmpty(),
     check("state", "State is required").not().isEmpty(),
-    check("createdBy", "id not recognized").not().isEmpty(),
+    check("owner", "id not recognized").not().isEmpty(),
     validateFields,
   ],
   createProject

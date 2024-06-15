@@ -26,7 +26,7 @@ export const getAllProjects = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
 
-    const allProjects = await ProjectModel.find({ createdBy: id });
+    const allProjects = await ProjectModel.find({ owner: id });
     res.json({
       ok: true,
       allProjects,

@@ -53,7 +53,7 @@ class Server {
 
   firstApi() {
     this.app.get("/", (req: Request, res: Response) =>
-      res.status(200).json({ msg: "Hola Mundo!!" })
+      res.status(200).json({ msg: "Server Up" })
     );
   }
 }

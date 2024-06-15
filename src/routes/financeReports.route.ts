@@ -8,6 +8,7 @@ import {
   getAReport,
   getAllReports,
   getMonthReports,
+  getMonthlySales,
   getMonthlySummary,
   getWeekReports,
   getWeekSales,
@@ -41,4 +42,5 @@ route.delete("/:id", validateJWT, deleteReport);
 route.get("/week-balance/:id", validateJWT, getWeeklySummary);
 route.get("/month-balance/:id", validateJWT, getMonthlySummary);
 route.get("/week-sales/:id", validateJWT, getWeekSales);
+route.get("/monthly-sales/:id", validateJWT, getMonthlySales);
 export default route;
